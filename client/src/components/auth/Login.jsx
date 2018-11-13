@@ -9,9 +9,10 @@ import { loginUser } from '../../actions/authActions';
 
 class Login extends Component {
   static propTypes = {
-    loginUser: func,
-    auth: object,
-    errors: object
+    loginUser: func.isRequired,
+    auth: object.isRequired,
+    errors: object,
+    history: object.isRequired
   };
 
   state = {
@@ -26,7 +27,7 @@ class Login extends Component {
     }
   };
 
-  componentWillReceiveProps = (nextProps) => {
+  UNSAFE_componentWillReceiveProps = nextProps => {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push('/dashboard');
     }
@@ -36,13 +37,13 @@ class Login extends Component {
     }
   };
 
-  onChange = (e) => {
+  onChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
 
-  onSubmit = (e) => {
+  onSubmit = e => {
     e.preventDefault();
 
     const userData = {
@@ -61,7 +62,9 @@ class Login extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Log In</h1>
-              <p className="lead text-center">Sign in to your DevConnector account</p>
+              <p className="lead text-center">
+                Sign in to your DevConnector account
+              </p>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="Email Address"

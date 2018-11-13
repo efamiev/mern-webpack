@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //  libs
 import { connect } from 'react-redux';
-import { object } from 'prop-types';
+import { object, func } from 'prop-types';
 //  components
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
@@ -11,6 +11,13 @@ import SelectListGroup from '../common/SelectListGroup';
 import { createProfile } from '../../actions/profileActions';
 
 class CreateProfile extends Component {
+  static propTypes = {
+    createProfile: func.isRequired,
+    profile: object.isRequired,
+    history: object.isRequired,
+    errors: object.isRequired
+  };
+
   state = {
     displaySocialInputs: false,
     handle: '',
@@ -29,13 +36,13 @@ class CreateProfile extends Component {
     errors: {}
   };
 
-  componentWillReceiveProps = (nextProps) => {
+  UNSAFE_componentWillUpdate = nextProps => {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
   };
 
-  onSubmit = (e) => {
+  onSubmit = e => {
     e.preventDefault();
 
     const profileData = {
@@ -59,9 +66,10 @@ class CreateProfile extends Component {
 
   onChange = ({ target: { value, name } }) => this.setState({ [name]: value });
 
-  toggleDisplaySocialInputs = () => this.setState(prevState => ({
-    displaySocialInputs: !prevState.displaySocialInputs
-  }));
+  toggleDisplaySocialInputs = () =>
+    this.setState(prevState => ({
+      displaySocialInputs: !prevState.displaySocialInputs
+    }));
 
   render() {
     const { errors, displaySocialInputs } = this.state;
@@ -125,7 +133,9 @@ class CreateProfile extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Create your profile</h1>
-              <p className="lead text-center">Let's get some information to make your profile stand out</p>
+              <p className="lead text-center">
+                Let's get some information to make your profile stand out
+              </p>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
@@ -187,13 +197,20 @@ class CreateProfile extends Component {
                   info="Tell us a little about yourself"
                 />
                 <div className="mb-3">
-                  <button onClick={this.toggleDisplaySocialInputs} className="btn btn-light">
+                  <button
+                    onClick={this.toggleDisplaySocialInputs}
+                    className="btn btn-light"
+                  >
                     Add social Network Link
                   </button>
                   <span className="text-muted">Optional</span>
                 </div>
                 {socialInputs}
-                <input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="btn btn-info btn-block mt-4"
+                />
               </form>
             </div>
           </div>
@@ -202,14 +219,12 @@ class CreateProfile extends Component {
     );
   }
 }
-CreateProfile.propTypes = {
-  profile: object.isRequired,
-  errors: object.isRequired
-};
+
 const mapStateToProps = state => ({
   profile: state.profile,
   errors: state.errors
 });
+
 export default connect(
   mapStateToProps,
   { createProfile }

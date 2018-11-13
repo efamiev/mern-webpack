@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //  libs
-import { func, object } from 'prop-types';
+import { shape, func, object } from 'prop-types';
 import { connect } from 'react-redux';
 //  components
 import TextFieldGroup from '../common/TextFieldGroup';
@@ -11,7 +11,10 @@ class Register extends Component {
   static propTypes = {
     auth: object.isRequired,
     registerUser: func.isRequired,
-    errors: object.isRequired
+    errors: object.isRequired,
+    history: shape({
+      push: func.isRequired
+    })
   };
 
   state = {
@@ -28,19 +31,19 @@ class Register extends Component {
     }
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
   }
 
-  onChange = (e) => {
+  onChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
 
-  onSubmit = (e) => {
+  onSubmit = e => {
     e.preventDefault();
 
     const newUser = {
@@ -54,9 +57,7 @@ class Register extends Component {
   };
 
   render() {
-    const {
-      name, email, password, password2
-    } = this.state;
+    const { name, email, password, password2 } = this.state;
     const { errors } = this.props;
 
     return (
@@ -65,7 +66,9 @@ class Register extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>
-              <p className="lead text-center">Create your DevConnector account</p>
+              <p className="lead text-center">
+                Create your DevConnector account
+              </p>
               <form noValidate onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="Name"

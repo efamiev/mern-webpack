@@ -9,11 +9,12 @@ import { clearCurrentProfile } from '../../actions/profileActions';
 
 class Navbar extends Component {
   static propTypes = {
-    logoutUser: func,
-    auth: object
+    logoutUser: func.isRequired,
+    clearCurrentProfile: func.isRequired,
+    auth: object.isRequired
   };
 
-  onLogoutClick = (e) => {
+  onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
     this.props.clearCurrentProfile();
@@ -59,7 +60,12 @@ class Navbar extends Component {
           <Link className="navbar-brand" to="/">
             DevConnector
           </Link>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#mobile-nav"
+          >
             <span className="navbar-toggler-icon" />
           </button>
 

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "webpack-dev-server --mode development",
     "build-dev": "webpack --progress --mode development",
-    "build-prod": "webpack --progress --mode production"
+    "build-prod": "webpack --progress --mode production",
+    "lint-fix": "eslint --fix --ext .js --ext .jsx ./src/"
   },
   "keywords": [],
   "author": "",
@@ -21,11 +22,14 @@
     "css-loader": "^1.0.1",
     "eslint": "^5.8.0",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
     "file-loader": "^2.0.0",
+    "prettier": "^1.15.2",
     "react-hot-loader": "^4.3.11",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",

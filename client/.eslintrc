@@ -1,25 +1,30 @@
 {
-  parser: 'babel-eslint',
-  'plugins': [
-    'react'
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
   ],
-  extends: [
-    'airbnb-base',
-    'plugin:react/recommended'
+  "extends": [
+    "airbnb-base",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
   ],
-  rules: {
-    'indent': ['error', 2],
-    'comma-dangle': ['error', 'never'],
-    'no-restricted-globals': ['error', 'never'],
-    'no-console': 'off',
-    'no-unused-expressions': 'off',
-    'max-len': ['error', 120],
-    'no-use-before-define': ['error', { 'functions': false, 'classes': true, 'variables': false }],
-    'no-underscore-dangle': ['error', { 'allow': ['__REDUX_DEVTOOLS_EXTENSION__'] }],
-    'camelcase': ['error', { 'allow': ['jWt_decode'] }]
+  "rules": {
+    "comma-dangle": ["error", "never"],
+    "no-lonely-if": "off",
+    "no-restricted-globals": ["error", "never"],
+    "import/no-unresolved": "off",
+    "no-console": "off",
+    "class-methods-use-this": "off",
+    "no-unused-expressions": "off",
+    "max-len": ["error", 120],
+    "no-use-before-define": ["error", { "functions": false, "classes": true, "variables": false }],
+    "no-underscore-dangle": ["error", { "allow": ["__REDUX_DEVTOOLS_EXTENSION__"] }],
+    "camelcase": ["error", { "ignoreDestructuring": true, "allow": ["UNSAFE_componentWillUpdate", "UNSAFE_componentWillReceiveProps", "jWt_decode", "jwt_decode"] }],
+    "react/no-unescaped-entities": "off",
+    "prettier/prettier": "error"
   },
-  env: {
-    'browser': true,
-    'node': true
+  "env": {
+    "browser": true,
+    "node": true
   }
 }
