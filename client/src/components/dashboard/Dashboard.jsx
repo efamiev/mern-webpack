@@ -4,13 +4,15 @@ import { connect } from 'react-redux';
 import { func, object } from 'prop-types';
 import { Link } from 'react-router-dom';
 //  components
+import ProfileActions from './ProfileActions';
 import Spinner from '../common/Spinner';
 //  actions
-import { getCurrentProfile } from '../../actions/profileActions';
+import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
 
 class Dashboard extends PureComponent {
   static propTypes = {
     getCurrentProfile: func,
+    deleteAccount: func,
     profile: object,
     auth: object
   };
@@ -18,6 +20,10 @@ class Dashboard extends PureComponent {
   componentDidMount() {
     this.props.getCurrentProfile();
   }
+
+  onDeleteClick = () => {
+    this.props.deleteAccount();
+  };
 
   render() {
     const { user } = this.props.auth;
@@ -36,6 +42,12 @@ class Dashboard extends PureComponent {
               Welcome,{' '}
               <Link to={`/profile/${profile.handle}`}>{user.name}!</Link>
             </p>
+            <ProfileActions />
+            {/* TODO: exp and edu */}
+            <div style={{ marginBottom: '60px' }} />
+            <button onClick={this.onDeleteClick} className="btn btn-danger">
+              Delete My Account
+            </button>
           </div>
         );
       } else {
@@ -74,5 +86,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile }
+  { getCurrentProfile, deleteAccount }
 )(Dashboard);
