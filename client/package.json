@@ -7,6 +7,7 @@
     "dev": "webpack-dev-server --mode development",
     "build-dev": "webpack --progress --mode development",
     "build-prod": "webpack --progress --mode production",
+    "lint": "eslint --ext .js --ext .jsx ./src/",
     "lint-fix": "eslint --fix --ext .js --ext .jsx ./src/"
   },
   "keywords": [],
@@ -29,6 +30,7 @@
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
     "file-loader": "^2.0.0",
+    "jest": "^23.6.0",
     "prettier": "^1.15.2",
     "react-hot-loader": "^4.3.11",
     "style-loader": "^0.23.1",
